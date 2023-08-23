@@ -1,6 +1,7 @@
 'use strict'
 
 function renderMeme() {
+    // resizeCanvas()
     const meme = getMeme()
 
     const elImg = new Image()
@@ -92,3 +93,17 @@ function onClickLine(ev){
  
 }
 
+// function resizeCanvas() {
+//     const elContainer = document.querySelector('.canvas-container')
+//     // Changing the canvas dimension clears the canvas
+//     gElCanvas.width = elContainer.clientWidth - 2
+// }
+
+
+
+function showEditor(){
+    const elEditor = document.querySelector('.editor')
+    const elGallery= document.querySelector('.gallery')
+    elEditor.style.display = 'flex'
+    elGallery.style.display = 'none'
+}

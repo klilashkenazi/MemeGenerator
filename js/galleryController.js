@@ -9,10 +9,16 @@ function renderGallery() {
 {/* <img src="meme-imgs (square)/1.jpg" onclick="onSelectImg(this)"> */ }
 
 function onImgSelect(elImgId) {
-    const elEditor = document.querySelector('.editor')
-    const elGallery= document.querySelector('.gallery')
-    elEditor.style.display = 'flex'
-    elGallery.style.display = 'none'
+    showEditor()
     setImg(elImgId)
     renderMeme()
+}
+
+
+
+function showGallery(){
+    const elEditor = document.querySelector('.editor')
+    const elGallery= document.querySelector('.gallery')
+    elEditor.style.display = 'none'
+    elGallery.style.display = 'block'
 }

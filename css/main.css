@@ -1,3 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+.main-nav{
+    background-color: orange;
+    margin-block-start: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-nav p{
+    cursor: pointer;
+}
 .imgs-container{
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
@@ -6,8 +19,45 @@ grid-row-gap: 1rem;
 
 .imgs-container img{
     height: 30vw;
+    cursor: pointer;
 }
 .editor{
     display: none;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
+
+.editor .canvas-container{
+    /* width: 80vw; */
+    /* background-color: aquamarine; */
+}
+
+.editor .tools{
+    background-color: orange;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
+
+}
+
+@media (min-width: 660px) {
+    .imgs-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    .imgs-container img {
+        height: 18vw;
+    }
+}
+/* LARGE */
+@media (min-width: 920px) {
+    .imgs-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    .imgs-container img {
+        height: 10vw;
+    }
+}
+
+/* MEDIA QUERIES */
+/* @import url("setup/mq.css"); */

@@ -1,0 +1,13 @@
+/* MEDIUM */
+@media (min-width: 660px) {
+    .imgs-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    .imgs-container img {
+        height: 20vw;
+    }
+}
+
+/* LARGE */
+/* @media (min-width: 920px) {} */
