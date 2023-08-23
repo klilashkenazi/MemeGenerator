@@ -1,14 +1,18 @@
-function renderGallery(){
-    let imgs= getImgs()
-    let strHTML = imgs.map(img=> `
+function renderGallery() {
+    let imgs = getImgs()
+    let strHTML = imgs.map(img => `
     <img src="${img.url}" class="img-${img.id}" onclick="onImgSelect(${img.id})">`).join('')
-    const elGallery = document.querySelector('.gallery')
-    elGallery.innerHTML=strHTML
+    const elImgsContainer = document.querySelector('.imgs-container')
+    elImgsContainer.innerHTML = strHTML
 }
 
-{/* <img src="meme-imgs (square)/1.jpg" onclick="onSelectImg(this)"> */}
+{/* <img src="meme-imgs (square)/1.jpg" onclick="onSelectImg(this)"> */ }
 
-function onImgSelect(elImgId){
-setImg(elImgId)
-renderMeme()
+function onImgSelect(elImgId) {
+    const elEditor = document.querySelector('.editor')
+    const elGallery= document.querySelector('.gallery')
+    elEditor.style.display = 'flex'
+    elGallery.style.display = 'none'
+    setImg(elImgId)
+    renderMeme()
 }
