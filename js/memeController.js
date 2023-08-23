@@ -2,15 +2,25 @@
 
 function renderMeme() {
     const meme = getMeme()
-    const memeLines = meme.lines
+
     const elImg = new Image()
     elImg.src = `img/${meme.selectedImgId}.jpg`
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        memeLines.map((memeLine, idx) => drawText(memeLine.txt, memeLine.color, memeLine.size, 200, 50 + idx * 250))
 
-    }
+        meme.lines.map((memeLine, idx) => {
+        drawText(memeLine.txt, memeLine.color, memeLine.size, memeLine.x, memeLine.y)
+        const textWidth = gCtx.measureText(memeLine.txt).width
+        onSetLineWidth(textWidth,idx)
+        if (idx===meme.selectedLineIdx) frameLine(memeLine.x - (textWidth + 10) / 2, memeLine.y - 25, textWidth + 10,memeLine.size+30)
+    })
+    }   
 }
+
+function onSetLineWidth(width,idx){
+setLineWidth(width,idx)
+}
+
 
 function drawText(text, color, size, x, y) {
     gCtx.lineWidth = 2
@@ -22,16 +32,14 @@ function drawText(text, color, size, x, y) {
 
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
-    const textMetrics= gCtx.measureText(text)
-    frameLine(x-(textMetrics.width+10)/2,y-25,textMetrics.width+10)
-
+    
 }
 
-function frameLine(x, y,width) {
+function frameLine(x, y, width,height) {
     gCtx.strokeStyle = 'white'
     gCtx.lineWidth = 2
     //  gCtx.fillRect(x, y, 390, 50);   
-    gCtx.strokeRect(x, y, width, 50);
+    gCtx.strokeRect(x, y, width, height);
 }
 function changeText(value) {
     console.log(value)
@@ -73,4 +81,14 @@ function onAddLine() {
 
 function onSwitchLine() {
     switchLine()
+    renderMeme()
 }
+
+function onClickLine(ev){
+    const { offsetX, offsetY} = ev
+    if (isLineClicked(offsetX, offsetY)) renderMeme()
+    // const textWidth = gCtx.measureText(line.txt).width
+
+ 
+}
+
