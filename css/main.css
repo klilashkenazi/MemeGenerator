@@ -1,6 +1,15 @@
 * {
     box-sizing: border-box;
 }
+
+button{
+    padding: 10px;
+    background-color: rgb(255, 81, 0);
+    border: none;
+    border-radius: 5px;
+    box-shadow:5px 5px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
 .main-nav{
     background-color: orange;
     margin-block-start: 0;
@@ -35,11 +44,13 @@ grid-row-gap: 1rem;
 
 .editor .tools{
     background-color: orange;
-    /* display: grid; */
-    /* grid-template-columns: 1fr 1fr; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
 }
-
+.editor .tools img{
+    height: 20px;
+}
 @media (min-width: 660px) {
     .imgs-container {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

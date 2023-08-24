@@ -10,38 +10,45 @@ function renderMeme() {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 
         meme.lines.map((memeLine, idx) => {
-        drawText(memeLine.txt, memeLine.color, memeLine.size, memeLine.x, memeLine.y)
-        const textWidth = gCtx.measureText(memeLine.txt).width
-        onSetLineWidth(textWidth,idx)
-        if (idx===meme.selectedLineIdx) frameLine(memeLine.x - (textWidth + 10) / 2, memeLine.y - 25, textWidth + 10,memeLine.size+30)
-    })
-    }   
+            drawText(memeLine.txt, memeLine.color, memeLine.size, memeLine.font, memeLine.alignment, memeLine.x, memeLine.y)
+            const textWidth = gCtx.measureText(memeLine.txt).width
+            onSetLineWidth(textWidth, idx)
+            if (idx === meme.selectedLineIdx) {
+                frameLine(memeLine.x, memeLine.y, memeLine.width, memeLine.size, memeLine.alignment)
+            }
+        })
+    }
 }
 
-function onSetLineWidth(width,idx){
-setLineWidth(width,idx)
+function onSetLineWidth(width, idx) {
+    setLineWidth(width, idx)
 }
 
 
-function drawText(text, color, size, x, y) {
+function drawText(text, color, size, font, alignment, x, y) {
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = color
-    gCtx.fillStyle = 'black'
-    gCtx.font = size + 'px Arial'
-    gCtx.textAlign = 'center'
+    gCtx.strokeStyle = 'black'
+    gCtx.fillStyle = color
+    gCtx.font = size + 'px ' + font
+    gCtx.textAlign = alignment
     gCtx.textBaseline = 'middle'
 
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
-    
+
 }
 
-function frameLine(x, y, width,height) {
+function frameLine(x, y, width, height, alignment) {
     gCtx.strokeStyle = 'white'
     gCtx.lineWidth = 2
-    //  gCtx.fillRect(x, y, 390, 50);   
-    gCtx.strokeRect(x, y, width, height);
+    if (alignment==='center') gCtx.strokeRect(x-width/2, y-height/2, width, height)
+    if (alignment==='left') gCtx.strokeRect(x, y-height/2, width, height)
+    if (alignment==='right') gCtx.strokeRect(x-width, y-height/2, width, height)
+
+    
 }
+// frameLine(memeLine.x - (textWidth + 10) / 2, memeLine.y - 25, textWidth + 10, memeLine.size + 30)
+
 function changeText(value) {
     console.log(value)
     setLineTxt(value)
@@ -61,6 +68,7 @@ function onSubmit(ev) {
 function downloadImg(elLink) {
     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
     elLink.href = imgContent
+
 }
 
 function onSetColor(value) {
@@ -69,7 +77,7 @@ function onSetColor(value) {
     renderMeme()
 }
 
-function onChangeFont(step) {
+function onChangeFontSize(step) {
     setFontSize(step)
     renderMeme()
 }
@@ -85,12 +93,12 @@ function onSwitchLine() {
     renderMeme()
 }
 
-function onClickLine(ev){
-    const { offsetX, offsetY} = ev
+function onClickLine(ev) {
+    const { offsetX, offsetY } = ev
     if (isLineClicked(offsetX, offsetY)) renderMeme()
     // const textWidth = gCtx.measureText(line.txt).width
 
- 
+
 }
 
 // function resizeCanvas() {
@@ -101,9 +109,36 @@ function onClickLine(ev){
 
 
 
-function showEditor(){
+function showEditor() {
     const elEditor = document.querySelector('.editor')
-    const elGallery= document.querySelector('.gallery')
+    const elGallery = document.querySelector('.gallery')
     elEditor.style.display = 'flex'
     elGallery.style.display = 'none'
 }
+
+function onChangeFont(value) {
+    changeFont(value)
+    renderMeme()
+
+}
+
+function onSetAlignment(value) {
+    setAlignment(value)
+    renderMeme()
+
+}
+
+function onDeleteLine(){
+    deleteLine()
+    renderMeme()
+}
+
+function onRandomMeme(){
+    randomMeme()
+    showEditor()
+    renderMeme()
+}
+// function onSaveMeme(){
+//     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
+//     saveMeme(imgContent)
+// }

@@ -1,5 +1,8 @@
 'use strict'
 
+const STORAGE_KEY = 'memesDB'
+var gMemes = []
+
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
@@ -7,10 +10,12 @@ var gMeme = {
         {
             txt: 'Write something',
             size: 20,
+            font: 'Impact',
             width: 207,
             color: 'white',
             x: 200,
-            y: 50
+            y: 50,
+            alignment: 'center'
         }
     ]
 }
@@ -37,7 +42,7 @@ function setFontSize(step) {
 }
 
 function addLine() {
-    gMeme.lines.push({ txt: 'Text', size: 20, color: 'white', x: 200, y: 300 })
+    gMeme.lines.push({ txt: 'Text', size: 20, font: 'Impact', width: 20, color: 'white', x: 200, y: 300, alignment: 'center' })
 }
 
 function switchLine() {
@@ -54,12 +59,41 @@ function setLineWidth(width, idx) {
 }
 
 function isLineClicked(x, y) {
+
     const clickedLineIdx = gMeme.lines.findIndex(line => {
-        return x <= line.x+ (line.width+10) / 2 && x>=line.x-(line.width+10)/2
-        && y<=line.y+(line.size+30)/2 && y>= line.y-(line.size+30)/2
-    })    
-    gMeme.selectedLineIdx=clickedLineIdx
-    return (clickedLineIdx>=0)
+        return x <= line.x + (line.width + 10) / 2 && x >= line.x - (line.width + 10) / 2
+            && y <= line.y + (line.size + 30) / 2 && y >= line.y - (line.size + 30) / 2
+    })
+    gMeme.selectedLineIdx = clickedLineIdx
+    return (clickedLineIdx >= 0)
+}
+
+function changeFont(value) {
+    gMeme.lines[gMeme.selectedLineIdx].font = value
+}
+
+function setAlignment(value) {
+    // const gMemeWidth =gMeme.lines[gMeme.selectedLineIdx].width
+    gMeme.lines[gMeme.selectedLineIdx].alignment = value
+    // gMeme.lines[gMeme.selectedLineIdx].x +=gMemeWidth/2
+
+
+}
+
+function deleteLine() {
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+}
+
+// function saveMeme() {
+
+//     gMemes.push(gMeme)
+//     saveToStorage(STORAGE_KEY, gMemes)
+// }
+
+function randomMeme() {
+    const randImgIdx = getRandomIntInclusive(0, gImgs.length-1)
+    gMeme.selectedImgId = randImgIdx
+    gMeme.lines[0].txt='That moment when'
 }
 
 
