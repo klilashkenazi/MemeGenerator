@@ -1,7 +1,9 @@
 * {
     box-sizing: border-box;
 }
-
+body{
+font-family: Arial, Helvetica, sans-serif;
+}
 button{
     padding: 10px;
     background-color: rgb(255, 81, 0);
@@ -13,8 +15,8 @@ button{
 .main-nav{
     background-color: orange;
     margin-block-start: 0;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
 }
 
 .main-nav p{
@@ -27,6 +29,15 @@ grid-row-gap: 1rem;
 }
 
 .imgs-container img{
+    height: 30vw;
+    cursor: pointer;
+}
+
+.saved-memes{
+    gap: 10px;
+
+}
+.saved-memes img{
     height: 30vw;
     cursor: pointer;
 }
@@ -51,24 +62,6 @@ grid-row-gap: 1rem;
 .editor .tools img{
     height: 20px;
 }
-@media (min-width: 660px) {
-    .imgs-container {
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    }
-
-    .imgs-container img {
-        height: 18vw;
-    }
-}
-/* LARGE */
-@media (min-width: 920px) {
-    .imgs-container {
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    }
-    .imgs-container img {
-        height: 10vw;
-    }
-}
 
 /* MEDIA QUERIES */
-/* @import url("setup/mq.css"); */
+@import url("setup/mq.css");

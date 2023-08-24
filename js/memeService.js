@@ -5,7 +5,7 @@ var gMemes = []
 
 var gMeme = {
     selectedImgId: 1,
-    selectedLineIdx: 0,
+    selectedLineIdx: -1,
     lines: [
         {
             txt: 'Write something',
@@ -15,32 +15,32 @@ var gMeme = {
             color: 'white',
             x: 200,
             y: 50,
-            alignment: 'center'
+            alignment: 'center',
+            isDrag: false
         }
     ]
 }
 
-function changeGmeme(savedMemeIdx){
-    const savedMemes=loadFromStorage(STORAGE_KEY)
+function changeGmeme(savedMemeIdx) {
+    const savedMemes = loadFromStorage(STORAGE_KEY)
     console.log(savedMemes[savedMemeIdx].meme)
-    gMeme=savedMemes[savedMemeIdx].meme
+    gMeme = savedMemes[savedMemeIdx].meme
 }
 
 function getMeme() {
     return gMeme
 }
 
-function setLineTxt(value) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = value
-}
-
 function setImg(elImgId) {
     gMeme.selectedImgId = elImgId
 }
 
+function setLineTxt(value) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = value
+}
+
 function setColor(value) {
     gMeme.lines[gMeme.selectedLineIdx].color = value
-    console.log(gMeme)
 }
 
 function setFontSize(step) {
@@ -48,7 +48,7 @@ function setFontSize(step) {
 }
 
 function addLine() {
-    gMeme.lines.push({ txt: 'Text', size: 20, font: 'Impact', width: 20, color: 'white', x: 200, y: 300, alignment: 'center' })
+    gMeme.lines.push({ txt: 'Text', size: 20, font: 'Impact', width: 20, color: 'white', x: 200, y: 300, alignment: 'center', isDrag: false })
 }
 
 function switchLine() {
@@ -56,7 +56,6 @@ function switchLine() {
         gMeme.selectedLineIdx = 0
     } else {
         gMeme.selectedLineIdx++
-
     }
 }
 
@@ -71,9 +70,20 @@ function isLineClicked(x, y) {
             && y <= line.y + (line.size + 30) / 2 && y >= line.y - (line.size + 30) / 2
     })
     gMeme.selectedLineIdx = clickedLineIdx
+    console.log('clickedLineIdx',clickedLineIdx)
     return (clickedLineIdx >= 0)
 }
 
+function setLineDrag(isDrag) {
+    console.log('isDrag hi')
+    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
+}
+
+function moveLine(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].x +=dx
+    gMeme.lines[gMeme.selectedLineIdx].y +=dy
+
+}
 function changeFont(value) {
     gMeme.lines[gMeme.selectedLineIdx].font = value
 }
@@ -82,8 +92,6 @@ function setAlignment(value) {
     // const gMemeWidth =gMeme.lines[gMeme.selectedLineIdx].width
     gMeme.lines[gMeme.selectedLineIdx].alignment = value
     // gMeme.lines[gMeme.selectedLineIdx].x +=gMemeWidth/2
-
-
 }
 
 function deleteLine() {
@@ -91,46 +99,22 @@ function deleteLine() {
 }
 
 function saveMeme(imgContent) {
-    gMemes.push({meme: gMeme,imgContent})
-    console.log(gMemes)
+    gMemes.push({ meme: gMeme, imgContent })
     saveToStorage(STORAGE_KEY, gMemes)
 }
 
-function getSavedMemes(){
+function deleteSavedMeme(savedMemeIdx) {
+    gMemes.splice(savedMemeIdx, 1)
+    saveToStorage(STORAGE_KEY, gMemes)
+}
+
+function getSavedMemes() {
     console.log(loadFromStorage(STORAGE_KEY))
     return loadFromStorage(STORAGE_KEY)
 }
-// function addImgToSavedMemes(imgContent) {
-//     gSavedMemes.push(imgContent)
-//     console.log(gSavedMemes)
-// }
-// function saveMemesToStorage(){
-//     saveToStorage(STORAGE_KEY, gMemes)
-// }
 
 function randomMeme() {
-    const randImgIdx = getRandomIntInclusive(0, gImgs.length-1)
+    const randImgIdx = getRandomIntInclusive(0, gImgs.length - 1)
     gMeme.selectedImgId = randImgIdx
-    gMeme.lines[0].txt='That moment when'
+    gMeme.lines[0].txt = 'That moment when'
 }
-
-
-
-// function onMouseMove(ev) {
-//     const { offsetX, offsetY, clientX, clientY } = ev
-//     // console.log('offsetX, offsetY:', offsetX, offsetY)
-//     // console.log(' clientX, clientY:', clientX, clientY)
-//     // console.log('gStars:', gStars)
-
-
-//     const clickedStar = gStars.find(star => {
-//         return offsetX >= star.x && offsetX <= star.x + BAR_WIDTH
-//             && offsetY >= star.y && offsetY <= star.y + star.rate
-//     })
-//     // console.log('clickedStar:', clickedStar)
-//     if (clickedStar) {
-//         openModal(clickedStar.name, clickedStar.rate, clientX, clientY)
-//     } else {
-//         closeModal()
-//     }
-// }

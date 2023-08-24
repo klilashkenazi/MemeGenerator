@@ -1,4 +1,7 @@
 'use strict'
+var gStartPos
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
 
 function renderMeme() {
     // resizeCanvas()
@@ -24,7 +27,6 @@ function onSetLineWidth(width, idx) {
     setLineWidth(width, idx)
 }
 
-
 function drawText(text, color, size, font, alignment, x, y) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
@@ -39,17 +41,15 @@ function drawText(text, color, size, font, alignment, x, y) {
 }
 
 function frameLine(x, y, width, height, alignment) {
+    console.log('hi frame')
     gCtx.strokeStyle = 'white'
     gCtx.lineWidth = 2
-    if (alignment==='center') gCtx.strokeRect(x-width/2, y-height/2, width, height)
-    if (alignment==='left') gCtx.strokeRect(x, y-height/2, width, height)
-    if (alignment==='right') gCtx.strokeRect(x-width, y-height/2, width, height)
-
-    
+    if (alignment === 'center') gCtx.strokeRect(x - width / 2, y - height / 2, width, height)
+    if (alignment === 'left') gCtx.strokeRect(x, y - height / 2, width, height)
+    if (alignment === 'right') gCtx.strokeRect(x - width, y - height / 2, width, height)
 }
-// frameLine(memeLine.x - (textWidth + 10) / 2, memeLine.y - 25, textWidth + 10, memeLine.size + 30)
 
-function changeText(value) {
+function onChangeText(value) {
     console.log(value)
     setLineTxt(value)
     renderMeme()
@@ -57,18 +57,6 @@ function changeText(value) {
 
 function onSubmit(ev) {
     ev.preventDefault()
-}
-// function coverCanvasWithImg(elImg) {
-//     console.log(gElCanvas)
-//     gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
-//     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-// }
-
-
-function downloadImg(elLink) {
-    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
-    elLink.href = imgContent
-
 }
 
 function onSetColor(value) {
@@ -96,9 +84,74 @@ function onSwitchLine() {
 function onClickLine(ev) {
     const { offsetX, offsetY } = ev
     if (isLineClicked(offsetX, offsetY)) renderMeme()
-    // const textWidth = gCtx.measureText(line.txt).width
+    document.body.style.cursor = 'move'
 
+}
 
+function onDown(ev) {
+    const { offsetX, offsetY } = ev
+    if (!isLineClicked(offsetX, offsetY)) {
+        console.log(!isLineClicked(offsetX, offsetY))
+        return
+    }
+    console.log('hi from here')
+
+    setLineDrag(true)
+
+    gStartPos = { x: offsetX, y: offsetY }
+    console.log(gStartPos)
+    document.body.style.cursor = 'move'
+    // renderMeme()
+
+}
+
+function onMove(ev) {
+    const meme = getMeme()
+    let isDrag = meme.lines[meme.selectedLineIdx].isDrag
+    if (!isDrag) return
+    const pos = getEvPos(ev)
+    const dx = pos.x - gStartPos.x
+    const dy = pos.y - gStartPos.y
+    moveLine(dx, dy)
+    gStartPos = pos
+    renderMeme()
+}
+
+function onUp() {
+    setLineDrag(false)
+    document.body.style.cursor = 'auto'
+}
+
+function getEvPos(ev) {
+
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+
+    if (TOUCH_EVS.includes(ev.type)) {
+        // Prevent triggering the mouse ev
+        ev.preventDefault()
+        // Gets the first touch point
+        ev = ev.changedTouches[0]
+        // Calc the right pos according to the touch screen
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    }
+    return pos
+}
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousedown', onDown)
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchend', onUp)
 }
 
 // function resizeCanvas() {
@@ -108,46 +161,98 @@ function onClickLine(ev) {
 // }
 
 
+function onChangeFont(value) {
+    changeFont(value)
+    renderMeme()
+}
 
+function onSetAlignment(value) {
+    setAlignment(value)
+    renderMeme()
+}
+
+function onDeleteLine() {
+    deleteLine()
+    renderMeme()
+}
+
+function downloadImg(elLink) {
+    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
+    elLink.href = imgContent
+
+}
+
+function onRandomMeme() {
+    randomMeme()
+    showEditor()
+    renderMeme()
+}
+
+function onSaveMeme() {
+    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
+    saveMeme(imgContent)
+}
+
+function onEditSavedMeme(savedMemeIdx) {
+    changeGmeme(savedMemeIdx)
+    showEditor()
+    renderMeme()
+}
+function onDeleteSavedMeme(savedMemeIdx) {
+    deleteSavedMeme(savedMemeIdx)
+    renderSavedMemes()
+
+}
 function showEditor() {
     const elEditor = document.querySelector('.editor')
     const elGallery = document.querySelector('.gallery')
     const elSaved = document.querySelector('.saved-memes')
     elEditor.style.display = 'flex'
     elGallery.style.display = 'none'
-    elSaved.style.display='none'
+    elSaved.style.display = 'none'
 }
 
-function onChangeFont(value) {
-    changeFont(value)
-    renderMeme()
 
+function onUploadImg() {
+    // Gets the image from the canvas
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg') 
+
+    function onSuccess(uploadedImgUrl) {
+        // Handle some special characters
+        const url = encodeURIComponent(uploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
+    }
+    
+    // Send the image to the server
+    doUploadImg(imgDataUrl, onSuccess)
 }
 
-function onSetAlignment(value) {
-    setAlignment(value)
-    renderMeme()
+// Upload the image to a server, get back a URL 
+// call the function onSuccess when done
+function doUploadImg(imgDataUrl, onSuccess) {
+    // Pack the image for delivery
+    const formData = new FormData()
+    formData.append('img', imgDataUrl)
 
-}
+    // Send a post req with the image to the server
+    const XHR = new XMLHttpRequest()
+    XHR.onreadystatechange = () => {
+        // If the request is not done, we have no business here yet, so return
+        if (XHR.readyState !== XMLHttpRequest.DONE) return
+        // if the response is not ok, show an error
+        if (XHR.status !== 200) return console.error('Error uploading image')
+        const { responseText: url } = XHR
+        // Same as
+        // const url = XHR.responseText
 
-function onDeleteLine(){
-    deleteLine()
-    renderMeme()
-}
-
-function onRandomMeme(){
-    randomMeme()
-    showEditor()
-    renderMeme()
-}
-function onSaveMeme(){
-    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
-    saveMeme(imgContent)
-}
-
-function onEditSavedMeme(savedMemeIdx){
-    changeGmeme(savedMemeIdx)
-    showEditor()
-    renderMeme()
-
+        // If the response is ok, call the onSuccess callback function, 
+        // that will create the link to facebook using the url we got
+        console.log('Got back live url:', url)
+        onSuccess(url)
+    }
+    XHR.onerror = (req, ev) => {
+        console.error('Error connecting to server with request:', req, '\nGot response data:', ev)
+    }
+    XHR.open('POST', '//ca-upload.com/here/upload.php')
+    XHR.send(formData)
 }

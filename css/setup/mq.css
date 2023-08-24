@@ -5,9 +5,16 @@
     }
 
     .imgs-container img {
-        height: 20vw;
+        height: 18vw;
+    }
+}
+/* LARGE */
+@media (min-width: 920px) {
+    .imgs-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    .imgs-container img {
+        height: 10vw;
     }
 }
 
-/* LARGE */
-/* @media (min-width: 920px) {} */

@@ -1,5 +1,6 @@
 'use strict'
 // var gSavedMemes = []
+var gImgFilter
 var gImgs = [
     { id: 1, url: 'img/1.jpg', keywords: ['angry'] },
     { id: 2, url: 'img/2.jpg', keywords: ['cute', 'dog'] },
@@ -16,8 +17,17 @@ var gImgs = [
 
 
 function getImgs() {
-    return gImgs
+    if (!gImgFilter || gImgFilter === 'All') return gImgs
+    let imgs = gImgs.filter(gImg => gImg.keywords.includes(gImgFilter))
+
+    return imgs
 }
+
+function filterBy(value) {
+    gImgFilter = value
+}
+
+
 
 // function addImgToSavedMemes(imgContent) {
 //     gSavedMemes.push(imgContent)
