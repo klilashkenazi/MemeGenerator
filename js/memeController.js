@@ -112,8 +112,10 @@ function onClickLine(ev) {
 function showEditor() {
     const elEditor = document.querySelector('.editor')
     const elGallery = document.querySelector('.gallery')
+    const elSaved = document.querySelector('.saved-memes')
     elEditor.style.display = 'flex'
     elGallery.style.display = 'none'
+    elSaved.style.display='none'
 }
 
 function onChangeFont(value) {
@@ -138,7 +140,14 @@ function onRandomMeme(){
     showEditor()
     renderMeme()
 }
-// function onSaveMeme(){
-//     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
-//     saveMeme(imgContent)
-// }
+function onSaveMeme(){
+    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
+    saveMeme(imgContent)
+}
+
+function onEditSavedMeme(savedMemeIdx){
+    changeGmeme(savedMemeIdx)
+    showEditor()
+    renderMeme()
+
+}

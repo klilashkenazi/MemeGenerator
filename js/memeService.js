@@ -20,6 +20,12 @@ var gMeme = {
     ]
 }
 
+function changeGmeme(savedMemeIdx){
+    const savedMemes=loadFromStorage(STORAGE_KEY)
+    console.log(savedMemes[savedMemeIdx].meme)
+    gMeme=savedMemes[savedMemeIdx].meme
+}
+
 function getMeme() {
     return gMeme
 }
@@ -84,9 +90,21 @@ function deleteLine() {
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
 }
 
-// function saveMeme() {
+function saveMeme(imgContent) {
+    gMemes.push({meme: gMeme,imgContent})
+    console.log(gMemes)
+    saveToStorage(STORAGE_KEY, gMemes)
+}
 
-//     gMemes.push(gMeme)
+function getSavedMemes(){
+    console.log(loadFromStorage(STORAGE_KEY))
+    return loadFromStorage(STORAGE_KEY)
+}
+// function addImgToSavedMemes(imgContent) {
+//     gSavedMemes.push(imgContent)
+//     console.log(gSavedMemes)
+// }
+// function saveMemesToStorage(){
 //     saveToStorage(STORAGE_KEY, gMemes)
 // }
 

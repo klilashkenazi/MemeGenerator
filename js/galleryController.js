@@ -16,9 +16,31 @@ function onImgSelect(elImgId) {
 
 
 
-function showGallery(){
+function showGallery() {
     const elEditor = document.querySelector('.editor')
-    const elGallery= document.querySelector('.gallery')
+    const elGallery = document.querySelector('.gallery')
+    const elSaved = document.querySelector('.saved-memes')
+    elSaved.style.display = 'none'
     elEditor.style.display = 'none'
     elGallery.style.display = 'block'
+}
+
+function renderSavedMemes() {
+    const savedMemes = getSavedMemes()
+    console.log(savedMemes[0].meme)
+    const elSaved = document.querySelector('.saved-memes')
+    let strHTML = savedMemes.map((savedMeme, idx) => `
+    <img src="${savedMeme.imgContent}" alt="" onclick="onEditSavedMeme(${idx})">`).join('')
+    elSaved.innerHTML = strHTML
+
+}
+
+function showSavedMemes() {
+    const elEditor = document.querySelector('.editor')
+    const elGallery = document.querySelector('.gallery')
+    const elSaved = document.querySelector('.saved-memes')
+    elEditor.style.display = 'none'
+    elGallery.style.display = 'none'
+    elSaved.style.display = 'flex'
+    renderSavedMemes()
 }
