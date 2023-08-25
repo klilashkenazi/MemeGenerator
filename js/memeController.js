@@ -89,25 +89,21 @@ function onClickLine(ev) {
 }
 
 function onDown(ev) {
-    const { offsetX, offsetY } = ev
-    if (!isLineClicked(offsetX, offsetY)) {
-        console.log(!isLineClicked(offsetX, offsetY))
-        return
-    }
-    console.log('hi from here')
-
+    const pos = getEvPos(ev)
+    if (!isLineClicked(pos.x, pos.y)) return
     setLineDrag(true)
-
-    gStartPos = { x: offsetX, y: offsetY }
-    console.log(gStartPos)
+    gStartPos = pos
     document.body.style.cursor = 'move'
-    // renderMeme()
 
 }
 
 function onMove(ev) {
+    ev.preventDefault()
+    console.log('moving')
+
     const meme = getMeme()
     let isDrag = meme.lines[meme.selectedLineIdx].isDrag
+    console.log(meme.lines[meme.selectedLineIdx].isDrag)
     if (!isDrag) return
     const pos = getEvPos(ev)
     const dx = pos.x - gStartPos.x
@@ -118,11 +114,14 @@ function onMove(ev) {
 }
 
 function onUp() {
+    console.log('up')
+
     setLineDrag(false)
     document.body.style.cursor = 'auto'
 }
 
 function getEvPos(ev) {
+    console.log(ev)
 
     let pos = {
         x: ev.offsetX,
@@ -130,6 +129,7 @@ function getEvPos(ev) {
     }
 
     if (TOUCH_EVS.includes(ev.type)) {
+        console.log('hi phone')
         // Prevent triggering the mouse ev
         ev.preventDefault()
         // Gets the first touch point
@@ -215,14 +215,14 @@ function showEditor() {
 
 function onUploadImg() {
     // Gets the image from the canvas
-    const imgDataUrl = gElCanvas.toDataURL('image/jpeg') 
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg')
 
     function onSuccess(uploadedImgUrl) {
         // Handle some special characters
         const url = encodeURIComponent(uploadedImgUrl)
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
     }
-    
+
     // Send the image to the server
     doUploadImg(imgDataUrl, onSuccess)
 }
