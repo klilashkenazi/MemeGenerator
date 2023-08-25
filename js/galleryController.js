@@ -1,7 +1,9 @@
+var gImg
+
 function renderGallery() {
     let imgs = getImgs()
     let strHTML = imgs.map(img => `
-    <img src="${img.url}" class="img-${img.id}" onclick="onImgSelect(${img.id})">`).join('')
+    <div class="img-container"><img src="${img.url}" class="img-${img.id}" onclick="onImgSelect(${img.id})"></div>`).join('')
     const elImgsContainer = document.querySelector('.imgs-container')
     elImgsContainer.innerHTML = strHTML
 }
@@ -10,6 +12,7 @@ function onImgSelect(elImgId) {
     showEditor()
     setImg(elImgId)
     renderMeme()
+    // gImg=null
 }
 
 function showGallery() {
@@ -42,11 +45,12 @@ function showSavedMemes() {
 }
 
 
-function onFilterBy(value){
-  filterBy(value)
-  renderGallery()
+function onFilterBy(value) {
+    filterBy(value)
+    renderGallery()
 }
 
+//////////////////////////////////////////////
 function onImgInput(ev) {
     loadImageFromInput(ev, saveImgToImgs)
 }
@@ -57,16 +61,38 @@ function loadImageFromInput(ev, onImageReady) {
     const reader = new FileReader()
 
     reader.onload = function (event) {
-        let img = new Image() 
-        img.src = event.target.result 
+        let img = new Image()
+        img.src = event.target.result
         img.onload = () => onImageReady(img)
     }
-    reader.readAsDataURL(ev.target.files[0]) 
+    reader.readAsDataURL(ev.target.files[0])
 }
 
 function saveImgToImgs(img) {
-    // Draw the img on the canvas
-    // gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-    console.log(img)
+    console.log(img.src)
+    console.log(gImgs.length+1)
+    addToGImgs(img.src)
+    renderGallery()
+    // showEditor()
+    // renderMeme()
 
 }
+
+
+// var gKeyWords = ['funny', 'cat']
+
+// function renderKeyWords() {
+//     const elKeyWords = document.querySelector('.key-words')
+//     const strHTML = gKeyWords.map((keyWord, idx) => `
+//     <span class="key-word key-word-${idx}" onclick="growKeyWord(${idx})">${keyWord}</span>`).join('')
+//     elKeyWords.innerHTML = strHTML
+// }
+
+// function growKeyWord(idx) {
+//     console.log('hi', idx)
+//     const elKeyWord = document.querySelector(`.key-word-${idx}`)
+//     elKeyWord.style.fontSize++
+//     console.log(elKeyWord.style.fontSize)
+
+//     renderKeyWords()
+// }

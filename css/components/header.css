@@ -1,0 +1,32 @@
+header {
+    background-color: orange;
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+    margin-block-end: 10px;
+
+}
+
+header img {
+    height: 40%;
+    margin-inline-start: 10px;
+    cursor: pointer;
+}
+
+header .main-nav {
+    margin-inline-end: 10px;
+    margin-block-start: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.main-nav p {
+    cursor: pointer;
+    color: white;
+}
+
+.main-nav p:hover {
+    /* border-bottom: 2px solid black; */
+    color: black;
+}

@@ -25,6 +25,7 @@ function changeGmeme(savedMemeIdx) {
     const savedMemes = loadFromStorage(STORAGE_KEY)
     console.log(savedMemes[savedMemeIdx].meme)
     gMeme = savedMemes[savedMemeIdx].meme
+    
 }
 
 function getMeme() {
@@ -70,12 +71,10 @@ function isLineClicked(x, y) {
             && y <= line.y + (line.size + 30) / 2 && y >= line.y - (line.size + 30) / 2
     })
     gMeme.selectedLineIdx = clickedLineIdx
-    console.log('clickedLineIdx',clickedLineIdx)
     return (clickedLineIdx >= 0)
 }
 
 function setLineDrag(isDrag) {
-    console.log('isDrag hi')
     gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
 }
 
@@ -118,3 +117,4 @@ function randomMeme() {
     gMeme.selectedImgId = randImgIdx
     gMeme.lines[0].txt = 'That moment when'
 }
+

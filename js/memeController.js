@@ -6,21 +6,29 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 function renderMeme() {
     // resizeCanvas()
     const meme = getMeme()
+    // const elImg = new Image()
+    let elImg
+    // if (!gImg) 
+    elImg = document.querySelector(`.img-${meme.selectedImgId}`)
+    // else elImg=gImg
 
-    const elImg = new Image()
-    elImg.src = `img/${meme.selectedImgId}.jpg`
-    elImg.onload = () => {
-        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+    // elImg.src = `img/${meme.selectedImgId}.jpg`
 
-        meme.lines.map((memeLine, idx) => {
-            drawText(memeLine.txt, memeLine.color, memeLine.size, memeLine.font, memeLine.alignment, memeLine.x, memeLine.y)
-            const textWidth = gCtx.measureText(memeLine.txt).width
-            onSetLineWidth(textWidth, idx)
-            if (idx === meme.selectedLineIdx) {
-                frameLine(memeLine.x, memeLine.y, memeLine.width, memeLine.size, memeLine.alignment)
-            }
-        })
-    }
+    // elImg.onload = () => {
+    gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+
+    meme.lines.map((memeLine, idx) => {
+        drawText(memeLine.txt, memeLine.color, memeLine.size, memeLine.font, memeLine.alignment, memeLine.x, memeLine.y)
+        const textWidth = gCtx.measureText(memeLine.txt).width
+        onSetLineWidth(textWidth, idx)
+        if (idx === meme.selectedLineIdx) {
+            frameLine(memeLine.x, memeLine.y, memeLine.width, memeLine.size, memeLine.alignment)
+        }
+    })
+    // }
+
+
 }
 
 function onSetLineWidth(width, idx) {
@@ -41,7 +49,6 @@ function drawText(text, color, size, font, alignment, x, y) {
 }
 
 function frameLine(x, y, width, height, alignment) {
-    console.log('hi frame')
     gCtx.strokeStyle = 'white'
     gCtx.lineWidth = 2
     if (alignment === 'center') gCtx.strokeRect(x - width / 2, y - height / 2, width, height)
@@ -55,9 +62,9 @@ function onChangeText(value) {
     renderMeme()
 }
 
-function onSubmit(ev) {
-    ev.preventDefault()
-}
+// function onSubmit(ev) {
+//     ev.preventDefault()
+// }
 
 function onSetColor(value) {
     console.log(value)
@@ -81,29 +88,27 @@ function onSwitchLine() {
     renderMeme()
 }
 
-function onClickLine(ev) {
-    const { offsetX, offsetY } = ev
-    if (isLineClicked(offsetX, offsetY)) renderMeme()
-    document.body.style.cursor = 'move'
+// function onClickLine(ev) {
+//     const { offsetX, offsetY } = ev
+//     if (isLineClicked(offsetX, offsetY)) renderMeme()
 
-}
+// }
 
 function onDown(ev) {
     const pos = getEvPos(ev)
-    if (!isLineClicked(pos.x, pos.y)) return
+    if (!isLineClicked(pos.x, pos.y)){ 
+        renderMeme()
+        return
+    }
     setLineDrag(true)
     gStartPos = pos
-    document.body.style.cursor = 'move'
-
+    renderMeme()
 }
 
 function onMove(ev) {
-    ev.preventDefault()
-    console.log('moving')
 
     const meme = getMeme()
     let isDrag = meme.lines[meme.selectedLineIdx].isDrag
-    console.log(meme.lines[meme.selectedLineIdx].isDrag)
     if (!isDrag) return
     const pos = getEvPos(ev)
     const dx = pos.x - gStartPos.x
@@ -111,17 +116,17 @@ function onMove(ev) {
     moveLine(dx, dy)
     gStartPos = pos
     renderMeme()
+    document.body.style.cursor = 'move'
+
 }
 
 function onUp() {
-    console.log('up')
+    document.body.style.cursor = 'auto'
 
     setLineDrag(false)
-    document.body.style.cursor = 'auto'
 }
 
 function getEvPos(ev) {
-    console.log(ev)
 
     let pos = {
         x: ev.offsetX,

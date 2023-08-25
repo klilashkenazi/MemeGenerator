@@ -1,0 +1,62 @@
+.editor{
+    background-color: rgb(222, 221, 221);
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.editor .canvas-container{
+    /* width: 80vw; */
+    
+}
+
+.editor .tools{
+    height: 200px;
+    width: 400px;
+    margin:10px 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 20px;
+
+}
+
+.editor .tools button{
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+.editor .tools img{
+    height: 90%;
+}
+.editor .tools .text-box{
+    height: 30px;
+    grid-column: 1/6;
+    border-radius: 10px;
+    border: none;
+}
+
+.editor .tools .switch{
+    grid-column: 2/3;
+}
+
+.editor .tools .font-up{
+    grid-column: 1/2;
+
+}
+
+.editor .tools .change-font{
+    border-radius: 10px;
+    border: none;
+    grid-column: 1/4;
+
+}

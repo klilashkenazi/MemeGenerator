@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+body{
+font-family: Arial, Helvetica, sans-serif;
+background-color: rgb(245, 245, 245);
+
+}
+
+
+
+
+.saved-memes{
+    gap: 10px;
+
+}
+.saved-memes img{
+    height: 30vw;
+    cursor: pointer;
+}

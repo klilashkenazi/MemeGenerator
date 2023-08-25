@@ -1,0 +1,57 @@
+.gallery .key-word {
+    font-size: 16px;
+}
+.choose {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.choose button {
+height: 2em;    
+background-color: rgb(255, 81, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.imgs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-row-gap: 1rem; 
+    margin:10px auto ;
+    gap: 10px;
+}
+
+.imgs-container .img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%; /* Set the width of the container */
+    padding-bottom: 100%; /* Maintain a 1:1 aspect ratio (height = width) */
+    overflow: hidden;
+
+}
+
+.imgs-container .img-container img{
+    cursor: pointer;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover the entire container */
+    height: 100%; /* Maintain the aspect ratio */
+    object-fit: cover;
+
+}
+
+

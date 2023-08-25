@@ -1,67 +1,15 @@
-* {
-    box-sizing: border-box;
-}
-body{
-font-family: Arial, Helvetica, sans-serif;
-}
-button{
-    padding: 10px;
-    background-color: rgb(255, 81, 0);
-    border: none;
-    border-radius: 5px;
-    box-shadow:5px 5px 10px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-}
-.main-nav{
-    background-color: orange;
-    margin-block-start: 0;
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
-}
 
-.main-nav p{
-    cursor: pointer;
-}
-.imgs-container{
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-grid-row-gap: 1rem;
-}
 
-.imgs-container img{
-    height: 30vw;
-    cursor: pointer;
-}
+/* COMPONENTS */
+@import url("./components/editor.css");
+@import url("./components/rest.css");
+@import url("./components/footer.css");
+@import url("./components/header.css");
+@import url("./components/gallery.css");
 
-.saved-memes{
-    gap: 10px;
 
-}
-.saved-memes img{
-    height: 30vw;
-    cursor: pointer;
-}
-.editor{
-    display: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
 
-.editor .canvas-container{
-    /* width: 80vw; */
-    /* background-color: aquamarine; */
-}
 
-.editor .tools{
-    background-color: orange;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-}
-.editor .tools img{
-    height: 20px;
-}
 
 /* MEDIA QUERIES */
 @import url("setup/mq.css");

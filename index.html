@@ -9,15 +9,17 @@
 </head>
 
 <body onload="onInit()">
-    <nav class="main-nav">
-        <h4>Meme Generator</h4>
-        <p onclick="showGallery()">Gallery</p>
-        <p onclick="showSavedMemes()">Saved memes</p>
+    <header>
+        <img src="ICONS/LOGO.png" onclick="showGallery()">
+        <nav class="main-nav">
+            <p onclick="showGallery()">Gallery</p>
+            <p onclick="showSavedMemes()">Saved memes</p>
+        </nav>
 
-    </nav>
+    </header>
+
     <section class="gallery">
-        <h1>Gallery</h1>
-        <input class="category" list="Category" placeholder="Filter by" onchange="onFilterBy(this.value)">
+        <div class="key-words"> </div>
         <datalist id="Category">
             <option value="All">
             <option value="baby">
@@ -26,10 +28,16 @@
             <option value="dog">
             <option value="cat">
         </datalist>
-        <p>Choose a photo</p>
-        <button class="flexible" onclick="onRandomMeme()">I'm flexible</button>
-        <p>or upload one</p>
-        <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" />
+        <div class="choose">
+            <p>Choose a photo</p>
+            <button class="flexible" onclick="onRandomMeme()">I'm flexible</button>
+        </div>
+        <div class="upload">
+            <p>or upload one</p>
+            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" />
+        </div>
+        <input class="category" list="Category" placeholder="Filter by" onchange="onFilterBy(this.value)">
+
         <div class="imgs-container"></div>
     </section>
     <section class="saved-memes">
@@ -37,43 +45,50 @@
     </section>
     <section class="editor">
         <div class="canvas-container">
-            <canvas width="400" height="400" style="outline: 1px solid black" onclick="onClickLine(event)">
+            <canvas width="400" height="400" style="outline: 1px solid black">
             </canvas>
         </div>
-        <form class="tools" onsubmit="onSubmit(event)">
-            <label for="text">Add text:</label>
-            <input type="text" id="text" name="text" oninput="onChangeText(this.value)">
+        <div class="tools">
+            <input class="text-box" type="text" id="text" name="text" oninput="onChangeText(this.value)">
             <!-- <button type="submit">Add</button> -->
-            <input type="color" id="colorPicker" name="colorPicker" value="#rrggbb" oninput="onSetColor(this.value)">
-            <button onclick="onChangeFontSize(1)">
+            <button class="switch" onclick="onSwitchLine()">
+                <img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> </button>
+            <button class="add" onclick="onAddLine()">
+                <img src="ICONS/add.png" alt=""> </button>
+            <button class="delete" onclick="onDeleteLine()">
+                <img src="ICONS/trash.png" alt=""></button>
+
+            <button class="font-up" onclick="onChangeFontSize(1)">
                 <img src="ICONS/increase font - icon.png" alt=""></button>
             <button onclick="onChangeFontSize(-1)">
                 <img src="ICONS/decrease font - icon.png" alt=""> </button>
-            <button onclick="onAddLine()">
-                <img src="ICONS/add.png" alt=""> </button>
-            <button onclick="onDeleteLine()">
-                <img src="ICONS/trash.png" alt=""></button>
-            <button onclick="onSetAlignment('left')">
-                <img src="ICONS/align-to-right.png" alt=""></button>
+
+
+
             <button onclick="onSetAlignment('right')">
                 <img src="ICONS/align-to-left.png" alt=""></button>
             <button onclick="onSetAlignment('center')">
                 <img src="ICONS/center-text-alignment.png" alt=""></button>
-            <button onclick="onSwitchLine()">
-                <img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> </button>
-            <select onchange="onChangeFont(this.value)">
+            <button onclick="onSetAlignment('left')">
+                <img src="ICONS/align-to-right.png" alt=""></button>
+
+            <select class="change-font" onchange="onChangeFont(this.value)">
                 <option value="Impact">Impact</option>
                 <option value='Courier New'>Courier New</option>
                 <option value="Arial">Arial</option>
             </select>
+            <input type="color" id="colorPicker" name="colorPicker" value="#rrggbb" oninput="onSetColor(this.value)">
             <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
             <button class="btn" onclick="onUploadImg()">
-               Share on Facebook
-              </button>
+                Share on Facebook
+            </button>
             <button onclick="onSaveMeme()">Save meme</button>
 
-        </form>
+        </div>
     </section>
+    <footer>
+
+    </footer>
     <script src="js/utilService.js"></script>
     <script src="js/main.js"></script>
     <script src="js/galleyService.js"></script>
