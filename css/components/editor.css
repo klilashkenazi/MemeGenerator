@@ -8,11 +8,6 @@
     align-items: center;
 }
 
-.editor .canvas-container {
-    /* width: 80vw; */
-
-}
-
 .editor .tools {
 
     height: 300px;
@@ -71,7 +66,6 @@
 
 .editor .tools .color {
     position: absolute;
-    /* z-index: 10; */
     width: 40px;
     height: 40px;
     opacity: 0;

@@ -4,7 +4,6 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 
 function renderMeme() {
-    // resizeCanvas()
     const meme = getMeme()
     // const elImg = new Image()
     let elImg
@@ -13,9 +12,7 @@ function renderMeme() {
     // } 
     // else elImg=getUploadedImg(meme.selectedImgId)
 
-
     // elImg.src = `img/${meme.selectedImgId}.jpg`
-
     // elImg.onload = () => {
     gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
@@ -29,8 +26,6 @@ function renderMeme() {
         }
     })
     // }
-
-
 }
 
 function onSetLineWidth(width, idx) {
@@ -63,10 +58,6 @@ function onChangeText(value) {
     renderMeme()
 }
 
-// function onSubmit(ev) {
-//     ev.preventDefault()
-// }
-
 function onSetColor(value) {
     console.log(value)
     setColor(value)
@@ -88,12 +79,6 @@ function onSwitchLine() {
     switchLine()
     renderMeme()
 }
-
-// function onClickLine(ev) {
-//     const { offsetX, offsetY } = ev
-//     if (isLineClicked(offsetX, offsetY)) renderMeme()
-
-// }
 
 function onDown(ev) {
     const pos = getEvPos(ev)
@@ -135,7 +120,6 @@ function getEvPos(ev) {
     }
 
     if (TOUCH_EVS.includes(ev.type)) {
-        console.log('hi phone')
         // Prevent triggering the mouse ev
         ev.preventDefault()
         // Gets the first touch point
@@ -159,13 +143,6 @@ function addTouchListeners() {
     gElCanvas.addEventListener('touchmove', onMove)
     gElCanvas.addEventListener('touchend', onUp)
 }
-
-// function resizeCanvas() {
-//     const elContainer = document.querySelector('.canvas-container')
-//     // Changing the canvas dimension clears the canvas
-//     gElCanvas.width = elContainer.clientWidth - 2
-// }
-
 
 function onChangeFont(value) {
     changeFont(value)

@@ -22,7 +22,6 @@ var gMeme = {
 
 function changeGmeme(savedMemeIdx) {
     const savedMemes = loadFromStorage(STORAGE_KEY)
-    // console.log(savedMemes[savedMemeIdx].meme)
     const meme = savedMemes[savedMemeIdx].meme
     gMeme=structuredClone(meme)
 

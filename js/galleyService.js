@@ -96,11 +96,3 @@ function growFilterKeyWord(idx) {
 function getKeyWords() {
     return gKeyWords
 }
-// function addImgToSavedMemes(imgContent) {
-//     gSavedMemes.push(imgContent)
-//     console.log(gSavedMemes)
-// }
-
-// function getSavedMemes() {
-//     return gSavedMemes
-// }
