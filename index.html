@@ -34,9 +34,9 @@
         </div>
         <div class="upload">
             <p>or upload one</p>
-            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" />
+            <input type="file" class="file-input btn" name="image" onclick="onClickText(event)" onchange="onImgInput(event)" accept="image/*" />
         </div>
-        <input class="category" list="Category" placeholder="Filter by" onchange="onFilterBy(this.value)">
+        <input class="category" list="Category" placeholder="Filter by"  onchange="onFilterBy(this.value)">
 
         <div class="imgs-container"></div>
     </section>
