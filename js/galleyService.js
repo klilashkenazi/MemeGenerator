@@ -70,16 +70,30 @@ function filterBy(value) {
 }
 
 function addToGImgs(imgSrc) {
+    // const img = img
+    // gUploadedImgs.push(img)
+    // const uploadedImgs =structuredClone(gUploadedImgs)
     gImgs.unshift({ id: gImgs.length + 1, url: imgSrc, keywords: [] })
     saveToStorage(STORAGE_KEY_IMGS, gImgs)
 }
+
+// function getUploadedImgs(){
+//     return loadFromStorage(STORAGE_KEY_IMGS)
+// }
+
+// function getUploadedImg(idx){
+//     console.log(idx)
+
+//     const uploadedImgs = loadFromStorage(STORAGE_KEY_IMGS)
+//     return uploadedImgs[idx]
+// }
 
 function growFilterKeyWord(idx) {
     gKeyWords[idx].times++
     filterBy(gKeyWords[idx].word)
 }
 
-function getKeyWords(){
+function getKeyWords() {
     return gKeyWords
 }
 // function addImgToSavedMemes(imgContent) {

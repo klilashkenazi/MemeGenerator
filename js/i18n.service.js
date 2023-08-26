@@ -58,6 +58,10 @@ const gTrans = {
     cat: {
         en: 'cat',
         he: 'חתולים'
+    },
+    delete: {
+        en: 'Delete',
+        he:'מחק'
     }
 }
 

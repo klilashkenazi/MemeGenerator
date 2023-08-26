@@ -9,7 +9,25 @@ function renderGallery() {
     const elImgsContainer = document.querySelector('.imgs-container')
     elImgsContainer.innerHTML = strHTML
     renderKeyWords()
+    // renderUploadedImgs()
 }
+// function renderUploadedImgs(){
+//     const uploadedImgs= getUploadedImgs()
+//     console.log(uploadedImgs)
+//     if (!uploadedImgs||!uploadedImgs.length) return
+//     let strHTML = uploadedImgs.map((img,idx) => `
+//     <div class=""><img src="${img}" class="" onclick="onUploadedImgSelect(${idx})">
+//     <button>Delete</button></div>`).join('')
+//     const elUploaded =document.querySelector('.uploaded-imgs')
+//     elUploaded.innerHTML = strHTML
+// }
+// function onUploadedImgSelect(idx){
+//     // to move to service
+//     gMeme.isFromGallery=true
+//     showEditor()
+//     setImg(idx)
+//     renderMeme()
+// }
 
 function onImgSelect(elImgId) {
     showEditor()
@@ -31,12 +49,12 @@ function showGallery() {
 function renderSavedMemes() {
     const savedMemes = getSavedMemes()
     // if (!savedMemes) return
-    console.log('hi')
     const elSaved = document.querySelector('.saved-memes')
     let strHTML = savedMemes.map((savedMeme, idx) => `
-    <img src="${savedMeme.imgContent}" alt="" onclick="onEditSavedMeme(${idx})">
-    <button onclick="onDeleteSavedMeme(${idx})">Delete</button>`).join('')
+    <div><img src="${savedMeme.imgContent}" alt="" onclick="onEditSavedMeme(${idx})">
+    <button data-trans="delete" onclick="onDeleteSavedMeme(${idx})">Delete</button></div>`).join('')
     elSaved.innerHTML = strHTML
+    doTrans()
 
 }
 
@@ -76,9 +94,10 @@ function loadImageFromInput(ev, onImageReady) {
 
 function saveImgToImgs(img) {
     console.log(img.src)
-    console.log(gImgs.length + 1)
+    console.log(gImgs)
     addToGImgs(img.src)
     renderGallery()
+    
     // showEditor()
     // renderMeme()
 

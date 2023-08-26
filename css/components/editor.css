@@ -1,5 +1,7 @@
 .editor {
     background-color: rgb(222, 221, 221);
+    /* background-color: rgb(245, 242, 242); */
+
     display: none;
     flex-wrap: wrap;
     justify-content: center;
@@ -12,12 +14,13 @@
 }
 
 .editor .tools {
+
     height: 300px;
     width: 400px;
     margin: 10px 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     row-gap: 15px;
     place-items: center;
 }

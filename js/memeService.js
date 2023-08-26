@@ -15,7 +15,6 @@ var gMeme = {
             color: 'white',
             x: 200,
             y: 50,
-            alignment: 'center',
             isDrag: false
         }
     ]
@@ -37,6 +36,7 @@ function setImg(elImgId) {
     gMeme.selectedImgId = elImgId
 }
 
+
 function setLineTxt(value) {
     gMeme.lines[gMeme.selectedLineIdx].txt = value
 }
@@ -50,7 +50,7 @@ function setFontSize(step) {
 }
 
 function addLine(text = 'Text') {
-    gMeme.lines.push({ txt: text, size: 30, font: 'Impact', width: 20, color: 'white', x: 200, y: 300, alignment: 'center', isDrag: false })
+    gMeme.lines.push({ txt: text, size: 30, font: 'Impact', width: 20, color: 'white', x: 200, y: 200, alignment: 'center', isDrag: false })
 }
 
 function switchLine() {
@@ -90,9 +90,10 @@ function changeFont(value) {
 }
 
 function setAlignment(value) {
-    // const gMemeWidth =gMeme.lines[gMeme.selectedLineIdx].width
-    gMeme.lines[gMeme.selectedLineIdx].alignment = value
-    // gMeme.lines[gMeme.selectedLineIdx].x +=gMemeWidth/2
+    console.log(value)
+    if (value === 'center') gMeme.lines[gMeme.selectedLineIdx].x=200
+    if (value === 'left') gMeme.lines[gMeme.selectedLineIdx].x=250
+    if (value === 'right') gMeme.lines[gMeme.selectedLineIdx].x=150
 }
 
 function deleteLine() {
@@ -108,8 +109,6 @@ function saveMeme(imgContent) {
 }
 
 function deleteSavedMeme(savedMemeIdx) {
-    console.log('hi')
-
     gSavedMemes.splice(savedMemeIdx, 1)
     saveToStorage(STORAGE_KEY, gSavedMemes)
     // console.log(localStorage)
@@ -129,13 +128,8 @@ function getSavedMemes() {
 function randomMeme() {
     const randImgIdx = getRandomIntInclusive(0, gImgs.length - 1)
     gMeme.selectedImgId = randImgIdx
-    if (!gMeme.lines.length) addLine()
+    gMeme.lines=[]
+    addLine()
     gMeme.lines[0].txt = 'That moment when'
 }
 
-const pet1 = { fullName: 'Charli B', score: 20, nicknames: ['Chuli', 'Chuchu'] }
-const pet3 = structuredClone(pet1)
-pet3.nicknames.push('Chip')
-pet3.fullName = 'Who are you'
-console.log('pet3', pet3)
-console.log('pet1', pet1)

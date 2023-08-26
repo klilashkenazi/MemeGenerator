@@ -8,9 +8,11 @@ function renderMeme() {
     const meme = getMeme()
     // const elImg = new Image()
     let elImg
-    // if (!gImg) 
-    elImg = document.querySelector(`.img-${meme.selectedImgId}`)
-    // else elImg=gImg
+    // if (meme.isFromGallery){
+        elImg = document.querySelector(`.img-${meme.selectedImgId}`)
+    // } 
+    // else elImg=getUploadedImg(meme.selectedImgId)
+
 
     // elImg.src = `img/${meme.selectedImgId}.jpg`
 
@@ -19,11 +21,11 @@ function renderMeme() {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 
     meme.lines.map((memeLine, idx) => {
-        drawText(memeLine.txt, memeLine.color, memeLine.size, memeLine.font, memeLine.alignment, memeLine.x, memeLine.y)
+        drawText(memeLine.txt, memeLine.color, memeLine.size, memeLine.font, memeLine.x, memeLine.y)
         const textWidth = gCtx.measureText(memeLine.txt).width
         onSetLineWidth(textWidth, idx)
         if (idx === meme.selectedLineIdx) {
-            frameLine(memeLine.x, memeLine.y, memeLine.width, memeLine.size, memeLine.alignment)
+            frameLine(memeLine.x, memeLine.y, memeLine.width, memeLine.size)
         }
     })
     // }
@@ -35,12 +37,12 @@ function onSetLineWidth(width, idx) {
     setLineWidth(width, idx)
 }
 
-function drawText(text, color, size, font, alignment, x, y) {
+function drawText(text, color, size, font, x, y) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = color
     gCtx.font = size + 'px ' + font
-    gCtx.textAlign = alignment
+    gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
     gCtx.fillText(text, x, y)
@@ -48,12 +50,10 @@ function drawText(text, color, size, font, alignment, x, y) {
 
 }
 
-function frameLine(x, y, width, height, alignment) {
+function frameLine(x, y, width, height) {
     gCtx.strokeStyle = 'white'
     gCtx.lineWidth = 2
-    if (alignment === 'center') gCtx.strokeRect(x - width / 2, y - height / 2, width, height)
-    if (alignment === 'left') gCtx.strokeRect(x, y - height / 2, width, height)
-    if (alignment === 'right') gCtx.strokeRect(x - width, y - height / 2, width, height)
+    gCtx.strokeRect(x - width / 2, y - height / 2, width, height)
 }
 
 
@@ -190,8 +190,8 @@ function downloadImg(elLink) {
 
 function onRandomMeme() {
     randomMeme()
-    showEditor()
     renderMeme()
+    showEditor()
 }
 
 function onSaveMeme() {

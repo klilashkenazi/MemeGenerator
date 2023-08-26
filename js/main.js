@@ -12,6 +12,4 @@ function onInit() {
     addTouchListeners()
     renderGallery()
     // window.addEventListener('resize', resizeCanvas)
-
-
 }

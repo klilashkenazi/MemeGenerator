@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-inline-end: 30px;
+    margin-inline-end: 10px;
 }
 
 
@@ -90,9 +90,15 @@
 }
 
 .saved-memes {
+    margin: auto 10px;
     display: flex;
     flex-wrap: wrap;
-    align-items: end;
+    gap: 10px;
+    height: 100%
+}
+
+.saved-memes div{
+    position: relative;
 }
 
 .saved-memes img {
@@ -106,7 +112,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    position: relative;
+    position: absolute;
+    bottom: 0px;
     right: 55px;
 }
 
