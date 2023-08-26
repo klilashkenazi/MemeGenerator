@@ -30,7 +30,8 @@ function showGallery() {
 
 function renderSavedMemes() {
     const savedMemes = getSavedMemes()
-    if (!savedMemes) return
+    // if (!savedMemes) return
+    console.log('hi')
     const elSaved = document.querySelector('.saved-memes')
     let strHTML = savedMemes.map((savedMeme, idx) => `
     <img src="${savedMeme.imgContent}" alt="" onclick="onEditSavedMeme(${idx})">

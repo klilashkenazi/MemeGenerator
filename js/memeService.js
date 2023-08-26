@@ -1,7 +1,7 @@
 'use strict'
 
 const STORAGE_KEY = 'memesDB'
-var gMemes = []
+var gSavedMemes = []
 
 var gMeme = {
     selectedImgId: 1,
@@ -24,8 +24,9 @@ var gMeme = {
 function changeGmeme(savedMemeIdx) {
     const savedMemes = loadFromStorage(STORAGE_KEY)
     // console.log(savedMemes[savedMemeIdx].meme)
-    gMeme = savedMemes[savedMemeIdx].meme
-    
+    const meme = savedMemes[savedMemeIdx].meme
+    gMeme=structuredClone(meme)
+
 }
 
 function getMeme() {
@@ -48,7 +49,7 @@ function setFontSize(step) {
     gMeme.lines[gMeme.selectedLineIdx].size += step
 }
 
-function addLine(text='Text') {
+function addLine(text = 'Text') {
     gMeme.lines.push({ txt: text, size: 30, font: 'Impact', width: 20, color: 'white', x: 200, y: 300, alignment: 'center', isDrag: false })
 }
 
@@ -75,13 +76,13 @@ function isLineClicked(x, y) {
 }
 
 function setLineDrag(isDrag) {
-    if (gMeme.selectedLineIdx<0) return
+    if (gMeme.selectedLineIdx < 0) return
     gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
 }
 
 function moveLine(dx, dy) {
-    gMeme.lines[gMeme.selectedLineIdx].x +=dx
-    gMeme.lines[gMeme.selectedLineIdx].y +=dy
+    gMeme.lines[gMeme.selectedLineIdx].x += dx
+    gMeme.lines[gMeme.selectedLineIdx].y += dy
 
 }
 function changeFont(value) {
@@ -99,19 +100,30 @@ function deleteLine() {
 }
 
 function saveMeme(imgContent) {
-    gMemes.push({ meme: gMeme, imgContent })
-    saveToStorage(STORAGE_KEY, gMemes)
+   const meme =structuredClone(gMeme)
+    gSavedMemes.push({ meme, imgContent })
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+    // console.log(localStorage)
+    console.log(gSavedMemes)
 }
 
 function deleteSavedMeme(savedMemeIdx) {
-    gMemes.splice(savedMemeIdx, 1)
-    saveToStorage(STORAGE_KEY, gMemes)
+    console.log('hi')
+
+    gSavedMemes.splice(savedMemeIdx, 1)
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+    // console.log(localStorage)
+
 }
 
 function getSavedMemes() {
-    const savedMeme = loadFromStorage(STORAGE_KEY)
-   if (!savedMeme || !savedMeme.length) return
-    return savedMeme
+    // console.log(localStorage)
+    // const savedMemes = gSavedMemes
+    const savedMemes = loadFromStorage(STORAGE_KEY)
+    // console.log(savedMeme)
+
+    //    if (!savedMeme || !savedMeme.length) return 
+    return savedMemes
 }
 
 function randomMeme() {
@@ -121,3 +133,9 @@ function randomMeme() {
     gMeme.lines[0].txt = 'That moment when'
 }
 
+const pet1 = { fullName: 'Charli B', score: 20, nicknames: ['Chuli', 'Chuchu'] }
+const pet3 = structuredClone(pet1)
+pet3.nicknames.push('Chip')
+pet3.fullName = 'Who are you'
+console.log('pet3', pet3)
+console.log('pet1', pet1)
