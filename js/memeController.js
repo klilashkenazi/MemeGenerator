@@ -56,7 +56,8 @@ function frameLine(x, y, width, height, alignment) {
     if (alignment === 'right') gCtx.strokeRect(x - width, y - height / 2, width, height)
 }
 
-function onChangeText(value) {
+function onChangeText(ev,value) {
+    ev.preventDefault()
     console.log(value)
     setLineTxt(value)
     renderMeme()
