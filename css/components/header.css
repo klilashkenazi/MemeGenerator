@@ -8,14 +8,19 @@ header {
 
 }
 
+header .lang{
+    position: absolute;
+    top:1px;
+    right: 0px;
+}
 header img {
     height: 40%;
-    margin-inline-start: 10px;
+    margin-inline-start: 20px;
     cursor: pointer;
 }
 
 header .main-nav {
-    margin-inline-end: 10px;
+    margin-inline-end: 30px;
     margin-block-start: 0;
     display: flex;
     gap: 10px;

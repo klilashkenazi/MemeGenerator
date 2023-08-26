@@ -9,7 +9,7 @@ var gMeme = {
     lines: [
         {
             txt: 'Write something',
-            size: 20,
+            size: 30,
             font: 'Impact',
             width: 207,
             color: 'white',
@@ -23,7 +23,7 @@ var gMeme = {
 
 function changeGmeme(savedMemeIdx) {
     const savedMemes = loadFromStorage(STORAGE_KEY)
-    console.log(savedMemes[savedMemeIdx].meme)
+    // console.log(savedMemes[savedMemeIdx].meme)
     gMeme = savedMemes[savedMemeIdx].meme
     
 }
@@ -48,8 +48,8 @@ function setFontSize(step) {
     gMeme.lines[gMeme.selectedLineIdx].size += step
 }
 
-function addLine() {
-    gMeme.lines.push({ txt: 'Text', size: 20, font: 'Impact', width: 20, color: 'white', x: 200, y: 300, alignment: 'center', isDrag: false })
+function addLine(text='Text') {
+    gMeme.lines.push({ txt: text, size: 30, font: 'Impact', width: 20, color: 'white', x: 200, y: 300, alignment: 'center', isDrag: false })
 }
 
 function switchLine() {
@@ -75,6 +75,7 @@ function isLineClicked(x, y) {
 }
 
 function setLineDrag(isDrag) {
+    if (gMeme.selectedLineIdx<0) return
     gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
 }
 
@@ -108,13 +109,15 @@ function deleteSavedMeme(savedMemeIdx) {
 }
 
 function getSavedMemes() {
-    console.log(loadFromStorage(STORAGE_KEY))
-    return loadFromStorage(STORAGE_KEY)
+    const savedMeme = loadFromStorage(STORAGE_KEY)
+   if (!savedMeme || !savedMeme.length) return
+    return savedMeme
 }
 
 function randomMeme() {
     const randImgIdx = getRandomIntInclusive(0, gImgs.length - 1)
     gMeme.selectedImgId = randImgIdx
+    if (!gMeme.lines.length) addLine()
     gMeme.lines[0].txt = 'That moment when'
 }
 

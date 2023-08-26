@@ -56,11 +56,7 @@ function frameLine(x, y, width, height, alignment) {
     if (alignment === 'right') gCtx.strokeRect(x - width, y - height / 2, width, height)
 }
 
-function onClickText(ev){
-    console.log(ev)
-    ev.preventDefault()
 
-}
 function onChangeText(value) {
     console.log(value)
     setLineTxt(value)
@@ -83,8 +79,8 @@ function onChangeFontSize(step) {
 }
 
 
-function onAddLine() {
-    addLine()
+function onAddLine(text) {
+    addLine(text)
     renderMeme()
 }
 
@@ -111,9 +107,9 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-
     const meme = getMeme()
-    let isDrag = meme.lines[meme.selectedLineIdx].isDrag
+    if (meme.selectedLineIdx<0) return
+    const isDrag = meme.lines[meme.selectedLineIdx].isDrag
     if (!isDrag) return
     const pos = getEvPos(ev)
     const dx = pos.x - gStartPos.x

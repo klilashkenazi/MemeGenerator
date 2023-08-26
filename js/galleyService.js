@@ -32,11 +32,32 @@ var gImgs = [
     { id: 25, url: 'img/25.jpg', keywords: ['happy'] }
 ]
 
+var gKeyWords = [
+    {
+        word: 'funny',
+        times: 14
+    },
+    {
+        word: 'cat',
+        times: 10
+    },
+    {
+        word: 'baby',
+        times: 9
+    },
+    {
+        word: 'angry',
+        times: 15
+    },
+    {
+        word: 'dog',
+        times: 20
+    }
+]
 
 function getImgs() {
-    console.log(gImgs)
     if (loadFromStorage(STORAGE_KEY_IMGS)) {
-        gImgs=loadFromStorage(STORAGE_KEY_IMGS)
+        gImgs = loadFromStorage(STORAGE_KEY_IMGS)
     }
     if (!gImgFilter || gImgFilter === 'All') return gImgs
     let imgs = gImgs.filter(gImg => gImg.keywords.includes(gImgFilter))
@@ -53,7 +74,14 @@ function addToGImgs(imgSrc) {
     saveToStorage(STORAGE_KEY_IMGS, gImgs)
 }
 
+function growFilterKeyWord(idx) {
+    gKeyWords[idx].times++
+    filterBy(gKeyWords[idx].word)
+}
 
+function getKeyWords(){
+    return gKeyWords
+}
 // function addImgToSavedMemes(imgContent) {
 //     gSavedMemes.push(imgContent)
 //     console.log(gSavedMemes)

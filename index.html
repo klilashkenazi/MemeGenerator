@@ -10,33 +10,40 @@
 
 <body onload="onInit()">
     <header>
+        <select class="lang" onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+        </select>
         <img src="ICONS/LOGO.png" onclick="showGallery()">
         <nav class="main-nav">
-            <p onclick="showGallery()">Gallery</p>
-            <p onclick="showSavedMemes()">Saved memes</p>
+            <p data-trans="gallery" onclick="showGallery()">Gallery</p>
+            <p data-trans="saved-memes" onclick="showSavedMemes()">Saved memes</p>
         </nav>
 
     </header>
 
     <section class="gallery">
-        <div class="key-words"> </div>
         <datalist id="Category">
-            <option value="All">
-            <option value="baby">
-            <option value="funny">
-            <option value="angry">
-            <option value="dog">
-            <option value="cat">
+            <option value="All" data-trans="all">
+            <option value="baby" data-trans="baby">
+            <option value="funny" data-trans="funny">
+            <option value="angry" data-trans="angry">
+            <option value="dog" data-trans="dog">
+            <option value="cat" data-trans="cat">
         </datalist>
         <div class="choose">
-            <p>Choose a photo</p>
-            <button class="flexible" onclick="onRandomMeme()">I'm flexible</button>
+            <p data-trans="coose-a-photo">Choose a photo</p>
+            <button data-trans="flexible" class="flexible" onclick="onRandomMeme()">I'm flexible</button>
         </div>
         <div class="upload">
-            <p>or upload one</p>
-            <input type="file" class="file-input btn" name="image" onclick="onClickText(event)" onchange="onImgInput(event)" accept="image/*" />
+            <p data-trans="upload">or upload one</p>
+            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" />
         </div>
-        <input class="category" list="Category" placeholder="Filter by"  onchange="onFilterBy(this.value)">
+        <div class="filter">
+            <input class="category" list="Category" placeholder="Filter by" onchange="onFilterBy(this.value)">
+            <div class="key-words"> </div>
+        </div>
+
 
         <div class="imgs-container"></div>
     </section>
@@ -49,7 +56,7 @@
             </canvas>
         </div>
         <div class="tools">
-            <input class="text-box" type="text" id="text" name="text" oninput="onChangeText(event,this.value)">
+            <input class="text-box" type="text" id="text" name="text" oninput="onChangeText(this.value)">
             <!-- <button type="submit">Add</button> -->
             <button class="switch" onclick="onSwitchLine()">
                 <img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> </button>
@@ -77,19 +84,30 @@
                 <option value='Courier New'>Courier New</option>
                 <option value="Arial">Arial</option>
             </select>
-            <input type="color" id="colorPicker" name="colorPicker" value="#rrggbb" oninput="onSetColor(this.value)">
-            <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
-            <button class="btn" onclick="onUploadImg()">
+            <button>
+                <img class="color-img" src="ICONS/paint-board-and-brush.png" alt="">
+                <input class="color" type="color" id="colorPicker" name="colorPicker" value="#rrggbb"
+                    oninput="onSetColor(this.value)">
+            </button>
+            <button class="sticker heart" onclick="onAddLine('❤️')">❤️</button>
+            <button class="sticker" onclick="onAddLine('🕶')">🕶</button>
+            <button class="sticker" onclick="onAddLine('✨')">✨</button>
+            <button class="sticker" onclick="onAddLine('👍🏾')">👍🏾</button>
+            <button class="sticker" onclick="onAddLine('👄')">👄</button>
+            <button class="btn download">
+                <a data-trans="download" href="#" onclick="downloadImg(this)" download="my-img.jpg">Download</a>
+            </button>
+            <button data-trans="facebook-share" class="btn" onclick="onUploadImg()">
                 Share on Facebook
             </button>
-            <button onclick="onSaveMeme()">Save meme</button>
+            <button data-trans="save-meme" class="btn" onclick="onSaveMeme()">Save meme</button>
 
         </div>
     </section>
-    <footer>
-
-    </footer>
+    <!-- <footer> -->
+    <!-- </footer> -->
     <script src="js/utilService.js"></script>
+    <script src="js/i18n.service.js"></script>
     <script src="js/main.js"></script>
     <script src="js/galleyService.js"></script>
     <script src="js/memeService.js"></script>

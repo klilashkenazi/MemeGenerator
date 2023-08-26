@@ -1,4 +1,6 @@
-var gImg
+// var gImg
+
+
 
 function renderGallery() {
     let imgs = getImgs()
@@ -6,6 +8,7 @@ function renderGallery() {
     <div class="img-container"><img src="${img.url}" class="img-${img.id}" onclick="onImgSelect(${img.id})"></div>`).join('')
     const elImgsContainer = document.querySelector('.imgs-container')
     elImgsContainer.innerHTML = strHTML
+    renderKeyWords()
 }
 
 function onImgSelect(elImgId) {
@@ -16,6 +19,7 @@ function onImgSelect(elImgId) {
 }
 
 function showGallery() {
+    onFilterBy('All')
     const elEditor = document.querySelector('.editor')
     const elGallery = document.querySelector('.gallery')
     const elSaved = document.querySelector('.saved-memes')
@@ -26,6 +30,7 @@ function showGallery() {
 
 function renderSavedMemes() {
     const savedMemes = getSavedMemes()
+    if (!savedMemes) return
     const elSaved = document.querySelector('.saved-memes')
     let strHTML = savedMemes.map((savedMeme, idx) => `
     <img src="${savedMeme.imgContent}" alt="" onclick="onEditSavedMeme(${idx})">
@@ -70,7 +75,7 @@ function loadImageFromInput(ev, onImageReady) {
 
 function saveImgToImgs(img) {
     console.log(img.src)
-    console.log(gImgs.length+1)
+    console.log(gImgs.length + 1)
     addToGImgs(img.src)
     renderGallery()
     // showEditor()
@@ -79,13 +84,14 @@ function saveImgToImgs(img) {
 }
 
 
-// var gKeyWords = ['funny', 'cat']
+// console.log(gKeyWords)
 
 // function renderKeyWords() {
 //     const elKeyWords = document.querySelector('.key-words')
 //     const strHTML = gKeyWords.map((keyWord, idx) => `
 //     <span class="key-word key-word-${idx}" onclick="growKeyWord(${idx})">${keyWord}</span>`).join('')
 //     elKeyWords.innerHTML = strHTML
+//     renderGallery()
 // }
 
 // function growKeyWord(idx) {
@@ -96,3 +102,37 @@ function saveImgToImgs(img) {
 
 //     renderKeyWords()
 // }
+
+
+
+{/* <button onclick="onKeywordPressed(this.value)" data-trans="happy" value="happy" class="keyword keyword1" style="font-size: 0.65em;">Happy</button> */}
+
+function renderKeyWords() {
+    const keyWords = getKeyWords()
+    const elKeyWords = document.querySelector('.key-words')
+    const strHTML = keyWords.map((keyWord, idx) => `
+    <span onclick="onKeyword(${idx})" data-trans="${keyWord.word}"  value="${keyWord.word}"
+    class="key-word key-word${idx}" style="font-size: ${keyWord.times}px;">${keyWord.word}</span>`).join('')
+    elKeyWords.innerHTML = strHTML
+    doTrans()
+}
+
+function onKeyword(idx) {
+//  console.log(document.querySelector('.key-word').value)
+    // console.log(value)
+    growFilterKeyWord(idx)
+    renderGallery()
+}
+
+
+function onSetLang(lang) {
+    const elLang=document.querySelector('.lang')
+    elLang.value=lang
+    setLang(lang)
+    // if lang is hebrew add RTL class to document.body
+    if (lang === 'he') document.body.classList.add('rtl')
+    else document.body.classList.remove('rtl')
+    renderGallery()
+    doTrans()
+    
+}

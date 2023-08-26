@@ -1,4 +1,4 @@
-.editor{
+.editor {
     background-color: rgb(222, 221, 221);
     display: none;
     flex-wrap: wrap;
@@ -6,23 +6,23 @@
     align-items: center;
 }
 
-.editor .canvas-container{
+.editor .canvas-container {
     /* width: 80vw; */
-    
+
 }
 
-.editor .tools{
-    height: 200px;
+.editor .tools {
+    height: 300px;
     width: 400px;
-    margin:10px 10px;
+    margin: 10px 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    row-gap: 20px;
-
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 15px;
+    place-items: center;
 }
 
-.editor .tools button{
+.editor .tools button {
     background-color: white;
     height: 40px;
     width: 40px;
@@ -35,28 +35,70 @@
 
 }
 
-.editor .tools img{
+.editor .tools img {
     height: 90%;
 }
-.editor .tools .text-box{
+
+.editor .tools .text-box {
     height: 30px;
     grid-column: 1/6;
     border-radius: 10px;
     border: none;
+    width: 400px;
+
 }
 
-.editor .tools .switch{
+.editor .tools .switch {
     grid-column: 2/3;
 }
 
-.editor .tools .font-up{
+.editor .tools .font-up {
     grid-column: 1/2;
 
 }
 
-.editor .tools .change-font{
+.editor .tools .change-font {
     border-radius: 10px;
     border: none;
     grid-column: 1/4;
+    width: 200px;
+    height: 30px;
+}
 
+
+.editor .tools .color {
+    position: absolute;
+    /* z-index: 10; */
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.editor .tools .heart{
+    grid-column: 1/2;
+}
+.editor .tools .sticker{
+    font-size: 35px;
+   
+}
+.editor .tools .btn{
+    background-color: rgb(255, 81, 0);
+    color: white;
+    height: 40px;
+    width: 75px;
+    border-radius: 5px;
+    margin-block-start: 5px;
+}
+
+.editor .tools .download {
+    grid-column: 2/3;
+}
+
+.editor .tools .download a {
+    color: white;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
