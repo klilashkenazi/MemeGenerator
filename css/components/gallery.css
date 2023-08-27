@@ -7,29 +7,39 @@
 }
 
 .gallery .filter {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-block-end: 40px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
+
 }
 
 .gallery .filter input {
     border-radius: 10px;
     justify-self: center;
+    align-self: start;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    width: 10rem;
+    position: absolute;
+    margin-block-start: 1em;
     
 }
 
-.gallery .filter button {
+.gallery .flexible {
     height: 2em;
     background-color: rgb(255, 81, 0);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Comic Sans MS', cursive;
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    margin-inline-start: 1em;
 }
 
-.gallery .filter button:hover {
+.gallery .flexible:hover {
     background-color: rgb(205, 65, 0);
 }
 
@@ -39,7 +49,10 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    position: relative;
+    /* position: relative; */
+    grid-column: 2;
+    grid-row: 2;
+
     /* padding-inline-end: 80px; */
 }
 
