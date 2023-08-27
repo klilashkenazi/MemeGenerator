@@ -31,23 +31,24 @@
                 <option value="dog" data-trans="dog">
                 <option value="cat" data-trans="cat">
             </datalist>
-            <section class="">
-            <div class="choose">
-            </div>
-            <div class="upload">
-                <p data-trans="upload">Upload a photo of your own</p>
-                <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" />
-            </div>
-        </section>
+            <section class="choose">
+                <!-- <div class="choose">
+            </div> -->
+                <div class="upload">
+                    <p data-trans="upload">Upload a photo of your own</p>
+                    <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)"
+                        accept="image/*" />
+                </div>
+            </section>
             <div class="filter">
                 <button data-trans="flexible" class="flexible" onclick="onRandomMeme()">I'm flexible</button>
                 <input class="category" list="Category" placeholder="Filter by" onchange="onFilterBy(this.value)">
                 <div class="key-words"> </div>
             </div>
 
-            <div class="uploaded-imgs"></div>
+            <!-- <div class="uploaded-imgs"></div> -->
             <div class="imgs-container"></div>
-        
+
         </section>
         <section class="saved-memes">
 

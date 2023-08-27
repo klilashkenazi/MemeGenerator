@@ -1,6 +1,6 @@
 footer {
     margin-block-start: 10px;
-    height: 100px;
+    /* height: 100px; */
     background-color: orange;
     display: grid;
     place-items: center;
