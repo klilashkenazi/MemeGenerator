@@ -1,5 +1,20 @@
 /* MEDIUM */
 @media (min-width: 660px) {
+    body {
+        grid-template-columns: var(--main-margin) 1fr var(--main-margin);
+    }
+    main {
+        grid-column: 2/3;
+    }
+
+    header img {
+        margin-inline-start: var(--main-margin);
+    }
+
+    header .main-nav {
+        margin-inline-end: var(--main-margin);
+    }
+
     .imgs-container {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
@@ -8,13 +23,25 @@
         height: 18vw;
     }
 }
+
 /* LARGE */
 @media (min-width: 920px) {
     .imgs-container {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     }
+
     .imgs-container img {
         height: 10vw;
     }
-}
 
+    .editor {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .editor .tools {
+        height: 400px;
+
+    }
+
+}

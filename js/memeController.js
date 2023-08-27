@@ -174,6 +174,13 @@ function onRandomMeme() {
 function onSaveMeme() {
     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
     saveMeme(imgContent)
+    const elModal= document.querySelector('.modal')
+    // elModal.classList.add('open')
+    // setTimeout(() => {
+    //     console.log('hi')
+
+    //     elModal.classList.remove('open')
+    //   }, 2000)
 }
 
 function onEditSavedMeme(savedMemeIdx) {

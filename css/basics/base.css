@@ -5,7 +5,9 @@
 body {
     margin: 0;
     font-family: 'Comic Sans MS', cursive;
-    background-color: rgb(222, 221, 221);
+    /* background-color: rgb(222, 221, 221); */
+    /* background-color: whitesmoke; */
+    background-color: white;
 }
 
 body.rtl {

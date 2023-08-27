@@ -11,17 +11,13 @@ const gTrans = {
         en: 'Saved memes',
         he: 'ממים שמורים'
     },
-    'coose-a-photo': {
-        en: 'Choose a photo',
-        he: 'בחר תמונה'
-    },
     flexible: {
         en: 'I\'m flexible',
         he: 'אני גמיש'
     },
     upload: {
-        en: 'Or Upload one',
-        he: 'או העלה אחת'
+        en: 'Upload a photo from your gallery',
+        he: 'העלה תמונה מגלריית התמונות שלך'
     },
     download: {
         en: 'Download',
@@ -62,6 +58,10 @@ const gTrans = {
     delete: {
         en: 'Delete',
         he:'מחק'
+    },
+    modal: {
+        en: 'Meme saved',
+        he:'מם נשמר'
     }
 }
 

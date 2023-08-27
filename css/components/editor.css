@@ -1,23 +1,31 @@
 .editor {
-    background-color: rgb(222, 221, 221);
-    /* background-color: rgb(245, 242, 242); */
-
     display: none;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    grid-column: 1/-1;
+    /* padding: 40px; */
+
 }
 
+.editor canvas{
+    background-color: rgb(222, 221, 221);
+    margin:  10px;
+
+}
 .editor .tools {
+    background-color: rgb(222, 221, 221);
 
     height: 300px;
     width: 400px;
-    margin: 10px 10px;
+    /* margin: 10px 10px; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-    row-gap: 15px;
+    row-gap: 10px;
     place-items: center;
+    /* padding: 20px; */
 }
 
 .editor .tools button {
@@ -42,7 +50,7 @@
     grid-column: 1/6;
     border-radius: 10px;
     border: none;
-    width: 400px;
+    width: 300px;
 
 }
 
@@ -86,6 +94,10 @@
     width: 75px;
     border-radius: 5px;
     margin-block-start: 5px;
+}
+
+.editor .tools .btn:hover {
+    background-color: rgb(205, 65, 0);
 }
 
 .editor .tools .download {

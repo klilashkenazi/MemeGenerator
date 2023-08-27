@@ -5,25 +5,27 @@ header {
     height: 80px;
     align-items: center;
     margin-block-end: 10px;
-
+    grid-column: 1/-1;
+    grid-row: 1/2;
 }
 
-header .lang{
+header .lang {
     position: absolute;
-    top:1px;
+    top: 1px;
     right: 0px;
 }
+
 header img {
     height: 40%;
-    margin-inline-start: 20px;
+    margin-inline-start: 10px;
     cursor: pointer;
 }
 
 header .main-nav {
-    margin-inline-end: 30px;
+    margin-inline-end: 10px;
     margin-block-start: 0;
     display: flex;
-    gap: 10px;
+    gap: 30px;
 }
 
 .main-nav p {

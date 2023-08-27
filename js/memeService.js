@@ -5,7 +5,7 @@ var gSavedMemes = []
 
 var gMeme = {
     selectedImgId: 1,
-    selectedLineIdx: -1,
+    selectedLineIdx: 0,
     lines: [
         {
             txt: 'Write something',
@@ -49,7 +49,16 @@ function setFontSize(step) {
 }
 
 function addLine(text = 'Text') {
-    gMeme.lines.push({ txt: text, size: 30, font: 'Impact', width: 20, color: 'white', x: 200, y: 200, alignment: 'center', isDrag: false })
+    gMeme.lines.push({ 
+        txt: text, 
+        size: 30, 
+        font: 'Impact', 
+        width: 20, 
+        color: 'white', 
+        x: getRandomIntInclusive(150,350), 
+        y: getRandomIntInclusive(150,350), 
+        isDrag: false })
+    gMeme.selectedLineIdx=gMeme.lines.length-1
 }
 
 function switchLine() {
@@ -130,5 +139,6 @@ function randomMeme() {
     gMeme.lines=[]
     addLine()
     gMeme.lines[0].txt = 'That moment when'
+    gMeme.selectedLineIdx=0
 }
 

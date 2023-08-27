@@ -21,89 +21,95 @@
         </nav>
 
     </header>
+    <main>
+        <section class="gallery">
+            <datalist id="Category">
+                <option value="All" data-trans="all">
+                <option value="baby" data-trans="baby">
+                <option value="funny" data-trans="funny">
+                <option value="angry" data-trans="angry">
+                <option value="dog" data-trans="dog">
+                <option value="cat" data-trans="cat">
+            </datalist>
+            <section class="">
+            <div class="choose">
+            </div>
+            <div class="upload">
+                <p data-trans="upload">Upload a photo of your own</p>
+                <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" />
+            </div>
+        </section>
+            <div class="filter">
+                <button data-trans="flexible" class="flexible" onclick="onRandomMeme()">I'm flexible</button>
+                <input class="category" list="Category" placeholder="Filter by" onchange="onFilterBy(this.value)">
+                <div class="key-words"> </div>
+            </div>
 
-    <section class="gallery">
-        <datalist id="Category">
-            <option value="All" data-trans="all">
-            <option value="baby" data-trans="baby">
-            <option value="funny" data-trans="funny">
-            <option value="angry" data-trans="angry">
-            <option value="dog" data-trans="dog">
-            <option value="cat" data-trans="cat">
-        </datalist>
-        <div class="choose">
-            <p data-trans="coose-a-photo">Choose a photo</p>
-            <button data-trans="flexible" class="flexible" onclick="onRandomMeme()">I'm flexible</button>
-        </div>
-        <div class="upload">
-            <p data-trans="upload">or upload one</p>
-            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" accept="image/*" />
-        </div>
-        <div class="filter">
-            <input class="category" list="Category" placeholder="Filter by" onchange="onFilterBy(this.value)">
-            <div class="key-words"> </div>
-        </div>
+            <div class="uploaded-imgs"></div>
+            <div class="imgs-container"></div>
+        
+        </section>
+        <section class="saved-memes">
 
-        <div class="uploaded-imgs"></div>
-        <div class="imgs-container"></div>
-    </section>
-    <section class="saved-memes">
+        </section>
+        <!-- <div class="modal">
+            <p data-trans="modal">Meme saved</p>
+        </div> -->
+        <section class="editor">
+            <div class="canvas-container">
+                <canvas width="400" height="400" style="outline: 1px solid black">
+                </canvas>
+            </div>
+            <div class="tools">
+                <input class="text-box" type="text" id="text" name="text" oninput="onChangeText(this.value)">
+                <!-- <button type="submit">Add</button> -->
+                <button class="switch" onclick="onSwitchLine()">
+                    <img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> </button>
+                <button class="add" onclick="onAddLine()">
+                    <img src="ICONS/add.png" alt=""> </button>
+                <button class="delete" onclick="onDeleteLine()">
+                    <img src="ICONS/trash.png" alt=""></button>
 
-    </section>
-    <section class="editor">
-        <div class="canvas-container">
-            <canvas width="400" height="400" style="outline: 1px solid black">
-            </canvas>
-        </div>
-        <div class="tools">
-            <input class="text-box" type="text" id="text" name="text" oninput="onChangeText(this.value)">
-            <!-- <button type="submit">Add</button> -->
-            <button class="switch" onclick="onSwitchLine()">
-                <img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""> </button>
-            <button class="add" onclick="onAddLine()">
-                <img src="ICONS/add.png" alt=""> </button>
-            <button class="delete" onclick="onDeleteLine()">
-                <img src="ICONS/trash.png" alt=""></button>
-
-            <button class="font-up" onclick="onChangeFontSize(1)">
-                <img src="ICONS/increase font - icon.png" alt=""></button>
-            <button onclick="onChangeFontSize(-1)">
-                <img src="ICONS/decrease font - icon.png" alt=""> </button>
+                <button class="font-up" onclick="onChangeFontSize(1)">
+                    <img src="ICONS/increase font - icon.png" alt=""></button>
+                <button onclick="onChangeFontSize(-1)">
+                    <img src="ICONS/decrease font - icon.png" alt=""> </button>
 
 
 
-            <button onclick="onSetAlignment('right')">
-                <img src="ICONS/align-to-left.png" alt=""></button>
-            <button onclick="onSetAlignment('center')">
-                <img src="ICONS/center-text-alignment.png" alt=""></button>
-            <button onclick="onSetAlignment('left')">
-                <img src="ICONS/align-to-right.png" alt=""></button>
+                <button onclick="onSetAlignment('right')">
+                    <img src="ICONS/align-to-left.png" alt=""></button>
+                <button onclick="onSetAlignment('center')">
+                    <img src="ICONS/center-text-alignment.png" alt=""></button>
+                <button onclick="onSetAlignment('left')">
+                    <img src="ICONS/align-to-right.png" alt=""></button>
 
-            <select class="change-font" onchange="onChangeFont(this.value)">
-                <option value="Impact">Impact</option>
-                <option value='Courier New'>Courier New</option>
-                <option value="Arial">Arial</option>
-            </select>
-            <button>
-                <img class="color-img" src="ICONS/paint-board-and-brush.png" alt="">
-                <input class="color" type="color" id="colorPicker" name="colorPicker" value="#rrggbb"
-                    oninput="onSetColor(this.value)">
-            </button>
-            <button class="sticker heart" onclick="onAddLine('❤️')">❤️</button>
-            <button class="sticker" onclick="onAddLine('🕶')">🕶</button>
-            <button class="sticker" onclick="onAddLine('✨')">✨</button>
-            <button class="sticker" onclick="onAddLine('👍🏾')">👍🏾</button>
-            <button class="sticker" onclick="onAddLine('👄')">👄</button>
-            <button class="btn download">
-                <a data-trans="download" href="#" onclick="downloadImg(this)" download="my-img.jpg">Download</a>
-            </button>
-            <button data-trans="facebook-share" class="btn" onclick="onUploadImg()">
-                Share on Facebook
-            </button>
-            <button data-trans="save-meme" class="btn" onclick="onSaveMeme()">Save meme</button>
+                <select class="change-font" onchange="onChangeFont(this.value)">
+                    <option value="Impact">Impact</option>
+                    <option value='Courier New'>Courier New</option>
+                    <option value="Arial">Arial</option>
+                </select>
+                <button>
+                    <img class="color-img" src="ICONS/paint-board-and-brush.png" alt="">
+                    <input class="color" type="color" id="colorPicker" name="colorPicker" value="#rrggbb"
+                        oninput="onSetColor(this.value)">
+                </button>
+                <button class="sticker heart" onclick="onAddLine('❤️')">❤️</button>
+                <button class="sticker" onclick="onAddLine('🕶')">🕶</button>
+                <button class="sticker" onclick="onAddLine('✨')">✨</button>
+                <button class="sticker" onclick="onAddLine('👍🏾')">👍🏾</button>
+                <button class="sticker" onclick="onAddLine('👄')">👄</button>
+                <button class="btn download">
+                    <a data-trans="download" href="#" onclick="downloadImg(this)" download="my-img.jpg">Download</a>
+                </button>
+                <button data-trans="facebook-share" class="btn" onclick="onUploadImg()">
+                    Share on Facebook
+                </button>
+                <button data-trans="save-meme" class="btn" onclick="onSaveMeme()">Save meme</button>
 
-        </div>
-    </section>
+            </div>
+        </section>
+    </main>
     <footer>
         <img src="ICONS/LOGO.png" onclick="showGallery()">
         <p>All rights reserved 2023</p>
